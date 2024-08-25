@@ -64,9 +64,9 @@ class Discriminator(nn.Module):
             ]
             if bn:
                 block.append(nn.BatchNorm2d(out_filters, 0.8))
-            return block
+            return nn.Sequential(*block)  # Properly return a Sequential block
 
-            self.model = nn.Sequential(
+        self.model = nn.Sequential(
             discriminator_block(img_shape[0], 16, bn=False),
             discriminator_block(16, 32),
             discriminator_block(32, 64),
